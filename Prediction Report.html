@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ziyi Yan, Weiyu Wang">
+
+<title>Classfication Model For Diabete Case Prediction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="STAT_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STAT_files/libs/quarto-html/quarto.js"></script>
+<script src="STAT_files/libs/quarto-html/popper.min.js"></script>
+<script src="STAT_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STAT_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STAT_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STAT_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STAT_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STAT_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STAT_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Classfication Model For Diabete Case Prediction</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ziyi Yan, Weiyu Wang </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="about-the-project" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-project">About the project</h2>
+<p>The Pima Indians, primarily located in Arizona, United States, have been a focal point to numerous diabetes research projects due to the high prevalence of diabetes. Research shows that there is significant prove on the Pima Indians is the exploration of genetic factors contributing to diabetes. Studies have revealed that certain genetic variants are more prevalent in the Pima Indian population, which may increase their risk of developing diabetes.</p>
+<p>This project examines diabetes prediction about the onset of diabetes based on diagnostic measures. The Dataset is from the National Institute of Diabetes and Digestive and Kidney Diseases. This dataset provides cross-sectional data of 2000 individual females of Pima Indian Heritage, who are at least 21 years old, with and without diabetes, and includes the mentioned possible contributing factors to diabetes. The dataset includes a total of 9 variables, which 8 are predictor variables: Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function, and Age and 1 target variable: Outcome. This dataset will allow us to explore several different possible factors for diabetes and determine if these variables are sufficient to predict if a person has diabetes or not. If not, is it possible to develop a model that accurately predicts diabetes by integrating various health indicators from the dataset?</p>
+</section>
+<section id="about-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-dataset">About the dataset</h2>
+<p><strong>Who is Pima Indians?</strong></p>
+<p>“The Pima (or Akimel O’odham, also spelled Akimel O’otham,”River People”, formerly known as Pima) are a group of Native Americans living in an area consisting of what is now central and southern Arizona. The majority population of the surviving two bands of the Akimel O’odham are based in two reservations: the Keli Akimel O’otham on the Gila River Indian Community (GRIC) and the On’k Akimel O’odham on the Salt River Pima-Maricopa Indian Community (SRPMIC).” Wikipedia[1]</p>
+<p><strong>What is diabetes?</strong></p>
+<p>According to NIH, “Diabetes is a disease that occurs when your blood glucose, also called blood sugar, is too high. Blood glucose is your main source of energy and comes from the food you eat. Insulin, a hormone made by the pancreas, helps glucose from food get into your cells to be used for energy. Sometimes your body doesn’t make enough—or any—insulin or doesn’t use insulin well. Glucose then stays in your blood and doesn’t reach your cells.</p>
+<p>Over time, having too much glucose in your blood can cause health problems. Although diabetes has no cure, you can take steps to manage your diabetes and stay healthy.</p>
+<p>Sometimes people call diabetes “a touch of sugar” or “borderline diabetes.” These terms suggest that someone doesn’t really have diabetes or has a less serious case, but every case of diabetes is serious.</p>
+<p><strong>What are the different types of diabetes?</strong></p>
+<p>The most common types of diabetes are type 1, type 2, and gestational diabetes.</p>
+<p><strong>Type 1 diabetes</strong> If you have type 1 diabetes, your body does not make insulin. Your immune system attacks and destroys the cells in your pancreas that make insulin. Type 1 diabetes is usually diagnosed in children and young adults, although it can appear at any age. People with type 1 diabetes need to take insulin every day to stay alive.</p>
+<p><strong>Type 2 diabetes</strong> If you have type 2 diabetes, your body does not make or use insulin well. You can develop type 2 diabetes at any age, even during childhood. However, this type of diabetes occurs most often in middle-aged and older people. Type 2 is the most common type of diabetes.</p>
+<p><strong>Gestational diabetes</strong></p>
+<p>Gestational diabetes develops in some women when they are pregnant. Most of the time, this type of diabetes goes away after the baby is born. However, if you’ve had gestational diabetes, you have a greater chance of developing type 2 diabetes later in life. Sometimes diabetes diagnosed during pregnancy is actually type 2 diabetes.</p>
+<p><strong>Other types of diabetes</strong></p>
+<p>Less common types include monogenic diabetes, which is an inherited form of diabetes, and cystic fibrosis-related diabetes.”[2]</p>
+</section>
+<section id="detail-of-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="detail-of-the-dataset">Detail of the dataset</h2>
+<p><strong>Diabetes Data Set</strong></p>
+<p>Source:</p>
+<p>Diabetes Data Set (kaggle.com)</p>
+<p><a href="https://www.kaggle.com/datasets/vikasukani/diabetes-data-set/data" class="uri">https://www.kaggle.com/datasets/vikasukani/diabetes-data-set/data</a></p>
+<p><strong>Columns/ Variables</strong></p>
+<p><em>Pregnancies</em>: Number of times pregnant</p>
+<p><em>Glucose</em>: Plasma glucose concentration, 2 hours in an oral glucose tolerance test</p>
+<p><em>Blood Pressure</em>: Diastolic blood pressure (mm Hg)</p>
+<p><em>Skin Thickness</em>: Triceps skin fold thickness (mm)</p>
+<p><em>Insulin</em>: 2-Hour seruminsulin (mu U/ml)</p>
+<p><em>BMI</em>: Body mass index (weight in kg/(height in m)^2)</p>
+<p><em>Diabetes Pedigree Function</em>: Diabetes pedigree function</p>
+<p><em>Age</em>: Age (years)</p>
+<p><em>Outcome</em>: Class variable (0 or 1) 268 of 768 are 1, the others are 0</p>
+</section>
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>As we all know, diabetes is still a lifelong disease with no cure. That means if a patient is diagnosed with diabetes, it is theoretically impossible to reverse it. Our goal is to try to accomplish the following by building a machine learning predictive model:</p>
+<p>· The model can accurately predict whether an individual has diabetes or not.</p>
+<p>· he model can tap into which risk factors best predict diabetes risk.</p>
+<p>· We can use a subset of risk factors to accurately predict whether an individual has diabete s.</p>
+<p>· We can use a screen for several important diabetes-causing characteristics and then combine them to create a short question that accurately predicts whether someone is likely to have diabetes or whether they are at high risk for diabetes.</p>
+</section>
+<section id="statistic-method" class="level2">
+<h2 class="anchored" data-anchor-id="statistic-method">Statistic Method</h2>
+<p><strong>Ploting</strong></p>
+<p>Histograms plot</p>
+<p>Scatter plot</p>
+<p>Box plot</p>
+<p><strong>Modeling</strong></p>
+<p>GLM</p>
+<p>GLIM with probit</p>
+<p>Random Forest</p>
+<p><strong>Assessing tools</strong></p>
+<p>AUC score</p>
+<p>ROC score</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">1. Data Preprocessing</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load the dataset</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">'/Users/ziyiyan/Downloads/diabetes-dataset.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will show the top a few samples of the dataset, but we will not print here</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Attach some packages</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice
+
+Attaching package: 'caret'
+
+The following object is masked from 'package:purrr':
+
+    lift</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>randomForest 4.7-1.1
+Type rfNews() to see new features/changes/bug fixes.
+
+Attaching package: 'randomForest'
+
+The following object is masked from 'package:dplyr':
+
+    combine
+
+The following object is masked from 'package:ggplot2':
+
+    margin</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Checking for NULL values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">is.na</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+</div>
+<p>Here we do not have null values in the dataset, but we do have some 0 values.</p>
+<p><strong>Handling missing or zero values for columns where zero is not even exist in real-word which could only have one reason for zero - missing data</strong></p>
+<p><em>Glucose</em>: A zero value for glucose is biologically implausible, as glucose is always present in the blood.</p>
+<p><em>BloodPressure</em>: A zero blood pressure would mean no blood circulation, which is not possible for a living individual.</p>
+<p><em>SkinThickness</em>: Zero skin thickness is not realistic in a physiological context.</p>
+<p><em>Insulin</em>: A zero value might indicate a missing measurement rather than an actual absence of insulin.</p>
+<p><em>BMI</em>: A Body Mass Index of zero is impossible for a living person.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It is medically impossible for the following variables to have 0 value </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>columns_with_zeros <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Glucose"</span>, <span class="st">"BloodPressure"</span>, <span class="st">"SkinThickness"</span>, <span class="st">"Insulin"</span>, <span class="st">"BMI"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data[columns_with_zeros] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data[columns_with_zeros], <span class="cf">function</span>(x) <span class="fu">replace</span>(x, x <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hence we replace them with the median value of that particular column</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> columns_with_zeros) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  data[[col]] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(data[[col]]), <span class="fu">median</span>(data[[col]], <span class="at">na.rm =</span> <span class="cn">TRUE</span>), data[[col]])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We observe that the minimum value of some columns is 0, which is medically impossible. Hence in the data cleaning process, we replace them with median value depending on the distribution.</p>
+</section>
+<section id="data-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="data-visualization">2. Data Visualization</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># #This will show some numerical summary of the dataset, but we will not print here</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## #This will show the correlation matrix of each variable, but we will not print here</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(data)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(correlation_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="histograms-plot" class="level4">
+<h4 class="anchored" data-anchor-id="histograms-plot">Histograms plot</h4>
+<p>An histogram is an accurate graphical representation of the distribution of numerical data. It takes as input one numerical variable only. The variable is cut into several bins, and the number of observation per bin is represented by the height of the bar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'gridExtra'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:randomForest':
+
+    combine</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    combine</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette("ggplot2-in-packages")` for more information.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>From the histograms above</strong>:</p>
+<p>The distribution of <em>Pregnancies</em> shows that most values are clustered at the lower end, indicating that a significant portion of individuals in the dataset have few or no pregnancies. The <em>Glucose</em>, <em>BloodPressure</em>, <em>SkinThickness</em>, <em>Insulin</em>, and <em>BMI</em> variables display somewhat normal distributions, though with varying degrees of skewness. This is expected as these are continuous physiological measurements. DiabetesPedigreeFunction shows a right-skewed distribution, suggesting that higher values are less frequent. The Age distribution is relatively spread out, indicating a diverse age range in the dataset. For the <em>Outcome</em>, the dataset seems imbalanced with more non-diabetic cases (0) than diabetic cases (1).</p>
+</section>
+<section id="scatter-plot" class="level4">
+<h4 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h4>
+<p>A Scatter plot displays in 2x2 with 2 variables. Each dot on the plot represents an sample observation. The plot is mainly use to study the relationship between the variables. It is common to provide even more information using colors or shapes (to show groups, or a third variable). It is also possible to map another variable to the size of each dot, what makes a bubble plot. If you have many dots and struggle with overplotting, consider using 2D density plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Scatter plot of Glucose vs Age</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> Glucose, <span class="at">y =</span> Age, <span class="at">color =</span> <span class="fu">as.factor</span>(Outcome))) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot of Glucose vs Age"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(scatter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In the scatter plot of <em>Glucose vs Age</em>, there is a noticeable clustering of diabetic cases (Outcome = 1) at higher glucose levels regardless of age. This aligns with the medical understanding that higher glucose levels are a significant indicator of diabetes.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+<p>The <em>Glucose vs Pregnancies</em> scatter plot shows that higher glucose levels are associated with diabetes across different numbers of pregnancies. However, there doesn’t seem to be a clear relationship between the number of pregnancies and glucose levels.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+<p>In the <em>Glucose vs Insulin</em> plot, diabetic cases are more prevalent at higher levels of both glucose and insulin. This is expected as insulin levels tend to increase in response to high glucose levels, especially in the case of insulin resistance, a common feature of type 2 diabetes.</p>
+</section>
+<section id="box-plot" class="level4">
+<h4 class="anchored" data-anchor-id="box-plot">Box plot</h4>
+<p>Box Plot is a box shape that displays the data distribution through quartiles.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From the box plot above:</p>
+<p><em>Pregnancies</em>: There’s a noticeable difference in the distribution of pregnancies between diabetic and non-diabetic individuals. Diabetic individuals tend to have a higher number of pregnancies on average.</p>
+<p><em>Glucose</em>: A clear distinction is visible, with higher glucose levels associated with diabetic individuals. This is consistent with the medical understanding of diabetes.</p>
+<p><em>Blood Pressure</em>: While there is some overlap, diabetic individuals tend to have slightly higher blood pressure. However, the difference is not as pronounced as with glucose.</p>
+<p><em>Skin Thickness</em>: Diabetic individuals generally have slightly thicker skin. The variance is also larger among diabetic individuals.</p>
+<p><em>Insulin</em>: Insulin levels are generally higher in diabetic individuals, with a broader spread in values indicating greater variability.</p>
+<p><em>BMI</em>: A higher BMI is observed in diabetic individuals. This suggests a possible link between obesity and diabetes, which is well-established in medical literature.</p>
+<p><em>Diabetes Pedigree Function</em>: There’s a slight difference in the distribution of this variable, with diabetic individuals having higher values. This metric indicates the genetic influence on the individual’s likelihood of developing diabetes.</p>
+<p><em>Age</em>: Age distribution indicates that diabetes is more prevalent in older individuals. The median age of diabetic individuals is higher than that of non-diabetic individuals.</p>
+</section>
+</section>
+<section id="train-test-split" class="level3">
+<h3 class="anchored" data-anchor-id="train-test-split">3. Train test split</h3>
+<p>The train test split is a useful technique for evaluating the performance of machine learning algorithm.</p>
+<p>Train Data: Used to fit the machine learning model.</p>
+<p>Test Data: Used to evaluate the fit machine learning model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>train_columns <span class="ot">&lt;-</span> <span class="fu">sapply</span>(data, is.numeric)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude the 'Outcome' column from scaling</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>train_columns[<span class="st">"Outcome"</span>] <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the numeric columns except for 'Outcome'</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>data[train_columns] <span class="ot">&lt;-</span> <span class="fu">scale</span>(data[train_columns])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here in this project, we will use train: 80% and test: 20%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>train.prop <span class="ot">&lt;-</span> <span class="fl">0.80</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>strats <span class="ot">&lt;-</span> data<span class="sc">$</span>Outcome</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>rr <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strats), strats)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">as.numeric</span>(<span class="fu">unlist</span>(<span class="fu">sapply</span>(rr, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">function</span>(x) <span class="fu">sample</span>(x, <span class="fu">length</span>(x)<span class="sc">*</span>train.prop)))))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>data.train <span class="ot">&lt;-</span> data[idx, ]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>data.test <span class="ot">&lt;-</span> data[<span class="sc">-</span>idx, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="modeling---glm" class="level3">
+<h3 class="anchored" data-anchor-id="modeling---glm">4. Modeling - GLM</h3>
+<p><strong>What is GLM?</strong></p>
+<p>The GLM stands for Generalized Linear Model. It is very common used and seen in R because of the flexible generalization of ordinary linear regression that allows for outcome variables that have error distribution models other than a normal distribution. GLM is used to model the relationship between a outcome variable and other predictor variables.</p>
+<p><strong>What can we know from the GLM?</strong></p>
+<p><strong>Coefficients</strong>: the change in the log odds of the outcome per unit change in the predictor</p>
+<p><strong>Standard Errors</strong>: the statistical accuracy of the coefficients</p>
+<p><strong>z-value</strong>:coefficient / standard error</p>
+<p><strong>P-value</strong>: used to determine if the statistical is significant</p>
+<section id="modeling" class="level4">
+<h4 class="anchored" data-anchor-id="modeling">Modeling</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a model with all variables</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>full.logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome <span class="sc">~</span> . ,<span class="at">data =</span> data.train, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full.logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Outcome ~ ., family = binomial(link = "logit"), 
+    data = data.train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.0123  -0.7210  -0.4294   0.7562   2.1527  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)              -0.88074    0.06620 -13.305  &lt; 2e-16 ***
+Pregnancies               0.37878    0.07351   5.153 2.57e-07 ***
+Glucose                   1.08667    0.07860  13.826  &lt; 2e-16 ***
+BloodPressure            -0.01714    0.06976  -0.246  0.80593    
+SkinThickness             0.05832    0.07728   0.755  0.45043    
+Insulin                  -0.05726    0.06426  -0.891  0.37285    
+BMI                       0.45365    0.07954   5.704 1.17e-08 ***
+DiabetesPedigreeFunction  0.21038    0.06636   3.170  0.00152 ** 
+Age                       0.17099    0.07505   2.278  0.02270 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2054.4  on 1598  degrees of freedom
+Residual deviance: 1528.8  on 1590  degrees of freedom
+AIC: 1546.8
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<p>The output gives the GLM regression coefficients along with their standard errors, z-test statistics, and p-values.</p>
+<p>For example, the estimated coefficient for <em>BloodPressure</em> is -0.01714 with a SE of 0.06976. This means that the decrease in expected log count <span class="math inline">\(\log \lambda_i\)</span> for one unit increase in <em>BloodPressure</em> is 0.01714. The p-value for <em>BloodPressure</em> is 0.80593, where we used to have alpha set as 0.05. The p-value for <em>BloodPressure</em> is greater than 0.05, hence we will say that it is not considered statistically significant. But <em>DiabetesPedigreeFunction</em> and <em>Age</em> both have a p-value that is less than 0.05, these are the only two variables considered as statistically significant.</p>
+<p>The output of the model also shows values for null deviance and residual deviance.The residual deviance tells us how well the response variable can be predicted by a model with the intercept and predictor variables.</p>
+<p>The model shows: Null deviance: 2054.4 on 1598 degrees of freedom Residual deviance: 1528.8 on 1590 degrees of freedom</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a model with no varibles,it is used to test the significance of the predictors in the full model. We will not show the output of this model here.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>null.logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data.train, </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null.logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a stepwise logit model, it uses both backward and forward selection to choose predictors for explaining the Outcome.</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>both.logit <span class="ot">&lt;-</span> <span class="fu">step</span>(null.logit, <span class="fu">list</span>(<span class="at">lower =</span> <span class="fu">formula</span>(null.logit),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">upper =</span> <span class="fu">formula</span>(full.logit)),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">direction =</span> <span class="st">"both"</span>, <span class="at">trace =</span> <span class="dv">0</span>, <span class="at">data =</span> data.train)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">formula</span>(both.logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Outcome ~ Glucose + Pregnancies + BMI + DiabetesPedigreeFunction + 
+    Age</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(both.logit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Outcome ~ Glucose + Pregnancies + BMI + DiabetesPedigreeFunction + 
+    Age, family = binomial(link = "logit"), data = data.train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.0475  -0.7211  -0.4325   0.7547   2.1509  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)              -0.87911    0.06596 -13.328  &lt; 2e-16 ***
+Glucose                   1.06326    0.07268  14.630  &lt; 2e-16 ***
+Pregnancies               0.37671    0.07317   5.148 2.63e-07 ***
+BMI                       0.46962    0.06766   6.941 3.89e-12 ***
+DiabetesPedigreeFunction  0.20904    0.06613   3.161  0.00157 ** 
+Age                       0.17577    0.07227   2.432  0.01501 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2054.4  on 1598  degrees of freedom
+Residual deviance: 1530.2  on 1593  degrees of freedom
+AIC: 1542.2
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="assessing-accuracy" class="level4">
+<h4 class="anchored" data-anchor-id="assessing-accuracy">Assessing accuracy</h4>
+<p><strong>What is AUC?</strong></p>
+<p>AUC measures the entire two-dimensional area below the entire ROC curve from (0,0) to (1,1). It provides an aggregated measure of the model’s performance over all possible classification thresholds. An AUC score of 1 indicates a perfect model, while a score of 0.5 suggests no discriminative ability, equivalent to random guessing.</p>
+<p><strong>What is ROC?</strong></p>
+<p>ROC curves are graphs that illustrate the diagnostic ability of binary classifiers in recognizing changes in thresholds</p>
+<p>We calculate and contrast the confusion matrices using the following code. When the predicted probability exceeds a certain threshold, we categorize the predicted response as 1; otherwise, it is categorized as 0. In these matrices, the rows represent the predictions, where ‘FALSE’ indicates a prediction of 0, and ‘TRUE’ indicates a prediction of 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Type 'citation("pROC")' for a citation.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pROC'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    cov, smooth, var</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess train data accuracy</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>pred.both <span class="ot">&lt;-</span> <span class="fu">predict</span>(both.logit, <span class="at">newdata =</span> data.train, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(table.both <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.both <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.train<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 935 257
+  TRUE  117 290</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(accuracy.both <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.both))<span class="sc">/</span><span class="fu">sum</span>(table.both))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 76.61</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>roc.both <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.train<span class="sc">$</span>Outcome <span class="sc">~</span> pred.both, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess test data accuracy</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>pred.both.test <span class="ot">&lt;-</span> <span class="fu">predict</span>(both.logit, <span class="at">newdata =</span> data.test, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>(table.both.test <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.both.test <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.test<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 239  60
+  TRUE   25  77</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>(accuracy.both.test <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.both.test))<span class="sc">/</span><span class="fu">sum</span>(table.both.test))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 78.803</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>roc.both.test <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.test<span class="sc">$</span>Outcome <span class="sc">~</span> pred.both.test, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+<section id="modeling-with-interactions" class="level4">
+<h4 class="anchored" data-anchor-id="modeling-with-interactions">Modeling with interactions</h4>
+<p>We fit a model that incorporates second-order interactions among all predictor variables. We perform a stepwise selection process to identify the most significant variables, then proceed to make predictions using the optimal set of predictors identified through this selection process.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set the all logit formula</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>variables <span class="ot">&lt;-</span> train_columns</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>interaction.var <span class="ot">&lt;-</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">combn</span>(variables, <span class="dv">2</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">FUN =</span> <span class="cf">function</span>(x)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(x, <span class="at">collapse =</span> <span class="st">":"</span>)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>formula.inter <span class="ot">&lt;-</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"Outcome ~ . +"</span>, <span class="fu">paste</span>(interaction.var, <span class="at">collapse =</span> <span class="st">"+"</span>)))</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>all.logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">formula =</span> formula.inter,</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>),</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> data.train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(all.logit )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = formula.inter, family = binomial(link = "logit"), 
+    data = data.train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.1821  -1.0408  -0.6805   0.5380   1.7157  
+
+Coefficients:
+                          Estimate Std. Error z value Pr(&gt;|z|)    
+Pregnancies               0.370675   0.072717   5.098 3.44e-07 ***
+Glucose                   1.067215   0.079299  13.458  &lt; 2e-16 ***
+BloodPressure             0.002295   0.065328   0.035   0.9720    
+SkinThickness            -0.004903   0.072827  -0.067   0.9463    
+Insulin                  -0.093022   0.066586  -1.397   0.1624    
+BMI                       0.416501   0.076906   5.416 6.11e-08 ***
+DiabetesPedigreeFunction  0.223023   0.064074   3.481   0.0005 ***
+Age                       0.121807   0.073603   1.655   0.0979 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2216.7  on 1599  degrees of freedom
+Residual deviance: 1729.1  on 1591  degrees of freedom
+AIC: 1745.1
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess train data accuracy</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>pred.all <span class="ot">&lt;-</span> <span class="fu">predict</span>(all.logit, <span class="at">newdata =</span> data.train, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>(table.all <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.all <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.train<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 754 118
+  TRUE  298 429</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>(accuracy.all <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.all))<span class="sc">/</span><span class="fu">sum</span>(table.all))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 73.984</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>roc.all <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.train<span class="sc">$</span>Outcome <span class="sc">~</span> pred.all, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess test data accuracy</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>pred.all.test <span class="ot">&lt;-</span> <span class="fu">predict</span>(all.logit, <span class="at">newdata =</span> data.test, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>(table.all.test <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.all.test <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.test<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 198  28
+  TRUE   66 109</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>(accuracy.all.test <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.all.test))<span class="sc">/</span><span class="fu">sum</span>(table.all.test))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 76.559</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>roc.all.test <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.test<span class="sc">$</span>Outcome <span class="sc">~</span> pred.all.test, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+<section id="result" class="level4">
+<h4 class="anchored" data-anchor-id="result">Result</h4>
+<p>Over all, with all the test above, we can see that stepwise model perform with the best result, with about 79% precision score and 86% AUC score.</p>
+<p>Here is the formula: Outcome ~ Glucose + Pregnancies + BMI + DiabetesPedigreeFunction + Age</p>
+</section>
+</section>
+<section id="modeling---glm-with-probit" class="level3">
+<h3 class="anchored" data-anchor-id="modeling---glm-with-probit">5. Modeling - GLM with Probit</h3>
+<p><strong>What’s the differences between GLM and GLM probit model?</strong></p>
+<p>The difference between GLM and GLM with a probit link function lies primarily in the choice of the link function used within the GLM framework.</p>
+<p>The interpretation and analysis of the probit link are similar to the GLM model.</p>
+<section id="modeling-1" class="level4">
+<h4 class="anchored" data-anchor-id="modeling-1">Modeling</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>full.probit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome <span class="sc">~</span> . ,<span class="at">data =</span> data.train , </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"probit"</span>))</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full.probit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Outcome ~ ., family = binomial(link = "probit"), 
+    data = data.train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.1480  -0.7306  -0.4122   0.7945   2.1782  
+
+Coefficients:
+                          Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)              -0.537775   0.037663 -14.279  &lt; 2e-16 ***
+Pregnancies               0.221363   0.042742   5.179 2.23e-07 ***
+Glucose                   0.639027   0.044196  14.459  &lt; 2e-16 ***
+BloodPressure            -0.000253   0.040574  -0.006  0.99502    
+SkinThickness             0.049599   0.044480   1.115  0.26481    
+Insulin                  -0.034714   0.037897  -0.916  0.35966    
+BMI                       0.241116   0.045790   5.266 1.40e-07 ***
+DiabetesPedigreeFunction  0.109130   0.038101   2.864  0.00418 ** 
+Age                       0.099016   0.044238   2.238  0.02521 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2054.4  on 1598  degrees of freedom
+Residual deviance: 1527.7  on 1590  degrees of freedom
+AIC: 1545.7
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<p>With the same example variable <em>BloodPressure</em>, the estimated coefficient for <em>BloodPressure</em> is -0.000253 with a SE of 0.040574. This means that the decrease in expected log count <span class="math inline">\(\log \lambda_i\)</span> for one unit increase in <em>BloodPressure</em> is 0.000253. The p-value for <em>BloodPressure</em> is 0.99502, where we used to have alpha set as 0.05. The p-value for <em>BloodPressure</em> is greater than 0.05, hence we will say that it is not considered statistically significant. But <em>DiabetesPedigreeFunction</em> and <em>Age</em> both have a p-value that is less than 0.05, these are the only two variables considered as statistically significant.</p>
+<p>The output of the model also shows values for null deviance and residual deviance.The residual deviance tells us how well the response variable can be predicted by a model with the intercept and predictor variables.</p>
+<p>The model shows: Null deviance: 2054.4 on 1598 degrees of freedom Residual deviance: 1527.8 on 1590 degrees of freedom</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>null.probit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data.train, </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"probit"</span>))</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null.probit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>both.probit <span class="ot">&lt;-</span> <span class="fu">step</span>(null.probit, <span class="fu">list</span>(<span class="at">lower =</span> <span class="fu">formula</span>(null.probit),</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">upper =</span> <span class="fu">formula</span>(full.probit)),</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">direction =</span> <span class="st">"both"</span>, <span class="at">trace =</span> <span class="dv">0</span>, <span class="at">data =</span> data.train)</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="fu">formula</span>(both.probit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Outcome ~ Glucose + Pregnancies + BMI + DiabetesPedigreeFunction + 
+    Age</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(both.probit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Outcome ~ Glucose + Pregnancies + BMI + DiabetesPedigreeFunction + 
+    Age, family = binomial(link = "probit"), data = data.train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.2596  -0.7218  -0.4211   0.7916   2.1777  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)              -0.53616    0.03752 -14.291  &lt; 2e-16 ***
+Glucose                   0.62648    0.04078  15.364  &lt; 2e-16 ***
+Pregnancies               0.22160    0.04258   5.205 1.94e-07 ***
+BMI                       0.25838    0.03888   6.645 3.03e-11 ***
+DiabetesPedigreeFunction  0.10640    0.03786   2.810  0.00495 ** 
+Age                       0.10403    0.04259   2.443  0.01458 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2054.4  on 1598  degrees of freedom
+Residual deviance: 1529.9  on 1593  degrees of freedom
+AIC: 1541.9
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+</section>
+<section id="assessing-accuracy-1" class="level4">
+<h4 class="anchored" data-anchor-id="assessing-accuracy-1">Assessing accuracy</h4>
+<section id="train-data" class="level5">
+<h5 class="anchored" data-anchor-id="train-data">Train data</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess train data accuracy</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>pred.both.probit <span class="ot">&lt;-</span> <span class="fu">predict</span>(both.probit, <span class="at">newdata =</span> data.train, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>(table.both.probit <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.both.probit <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.train<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 940 257
+  TRUE  112 290</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>(accuracy.both.probit <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.both.probit))<span class="sc">/</span><span class="fu">sum</span>(table.both.probit))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 76.923</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>roc.both.probit <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.train<span class="sc">$</span>Outcome <span class="sc">~</span> pred.both.probit, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+<section id="test-data" class="level5">
+<h5 class="anchored" data-anchor-id="test-data">Test data</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess test data accuracy</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>pred.both.probit.test <span class="ot">&lt;-</span> <span class="fu">predict</span>(both.probit, <span class="at">newdata =</span> data.test, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>(table.both.probit.test <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.both.probit.test <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.test<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 239  60
+  TRUE   25  77</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>(accuracy.both.probit.test <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.both.probit.test))<span class="sc">/</span><span class="fu">sum</span>(table.both.probit.test))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 78.803</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>roc.both.probit.test <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.test<span class="sc">$</span>Outcome <span class="sc">~</span> pred.both.probit.test, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="result-1" class="level4">
+<h4 class="anchored" data-anchor-id="result-1">Result</h4>
+<p>With all tests above, the performance of GLM probit model after stepwise selection is very similar to GLM logit model, with both 78% precision score and slightly lower 85% AUC score on test data. Both GLM model, with the probit and logit link function, did not overfitting the train data which is a good sign.</p>
+</section>
+</section>
+<section id="modeling---random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="modeling---random-forest">6. Modeling - Random Forest</h3>
+<p><strong>What is random forest model?</strong></p>
+<p>Random forest is a a powerful machine learning technique that combines the predictions from multiple machine learning algorithms to make more accurate predictions than any individual model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the Random Forest model with selected features</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(Outcome <span class="sc">~</span> Glucose <span class="sc">+</span> Pregnancies <span class="sc">+</span> BMI <span class="sc">+</span> DiabetesPedigreeFunction <span class="sc">+</span> Age, </span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data.train, </span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ntree =</span> <span class="dv">500</span>, <span class="co"># Number of trees to grow. This is a default value.</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">importance =</span> <span class="cn">TRUE</span>) <span class="co"># Calculate variable importance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in randomForest.default(m, y, ...): The response has five or fewer
+unique values.  Are you sure you want to do regression?</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the model</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ randomForest(formula = Outcome ~ Glucose + Pregnancies + BMI +      DiabetesPedigreeFunction + Age, data = data.train, ntree = 500,      importance = TRUE) 
+               Type of random forest: regression
+                     Number of trees: 500
+No. of variables tried at each split: 1
+
+          Mean of squared residuals: 0.04267357
+                    % Var explained: 81.04</code></pre>
+</div>
+</div>
+<section id="assessing-accuracy-2" class="level4">
+<h4 class="anchored" data-anchor-id="assessing-accuracy-2">Assessing accuracy</h4>
+<section id="train-data-1" class="level5">
+<h5 class="anchored" data-anchor-id="train-data-1">Train data</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess train data accuracy</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>pred.rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, <span class="at">newdata =</span> data.train, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>(table.rf <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.rf <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.train<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+           0    1
+  FALSE 1052    2
+  TRUE     0  545</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>(accuracy.rf <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.rf))<span class="sc">/</span><span class="fu">sum</span>(table.rf))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 99.875</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>roc.rf <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.train<span class="sc">$</span>Outcome <span class="sc">~</span> pred.rf, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+<section id="test-data-1" class="level5">
+<h5 class="anchored" data-anchor-id="test-data-1">Test data</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assess test data accuracy</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>pred.rf.test <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, <span class="at">newdata =</span> data.test, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>(table.rf.test <span class="ot">&lt;-</span> <span class="fu">table</span>(pred.rf.test <span class="sc">&gt;</span> <span class="fl">0.5</span>, data.test<span class="sc">$</span>Outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+          0   1
+  FALSE 262   6
+  TRUE    2 131</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>(accuracy.rf.test <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(<span class="fu">diag</span>(table.rf.test))<span class="sc">/</span><span class="fu">sum</span>(table.rf.test))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 98.005</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>roc.rf.test <span class="ot">&lt;-</span> <span class="fu">roc</span>(data.test<span class="sc">$</span>Outcome <span class="sc">~</span> pred.rf.test, <span class="at">plot =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, <span class="at">print.auc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="STAT_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="384"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="result-2" class="level4">
+<h4 class="anchored" data-anchor-id="result-2">Result</h4>
+<p>The random forest model with feature selected by stepwise have the best performance. with 98% accuracy on test data, not overfitting at all. Thus in conclusion, random forest can be considered as a desired model for predicting diabetes outcomes in our dataset.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This comprehensive analysis of the Pima Indian Diabetes dataset has provided valuable insights into the factors influencing diabetes and the effectiveness of various machine learning models in predicting diabetes outcomes. Through proper data preprocessing, including handling of biologically implausible zero values and median imputation, we ensured the integrity and reliability of our dataset for analysis.</p>
+<p>The EDA revealed key insights, such as the significant impact of glucose levels, BMI, and age on diabetes outcomes, highlighting their potential as critical predictors in diabetes risk assessment. Our histogram and scatter plot analyses underscored the relationships between these variables and diabetes, reinforcing their importance in predictive modeling.</p>
+<p>The application of Generalized Linear Models (GLM) with both logit and probit links provided a robust statistical framework for understanding the influence of individual predictors. The models, especially after stepwise selection, showed notable inprove in predictive power, with the logit model slightly outperforming the probit model in terms of precision and AUC scores.</p>
+<p>However, the most significant finding of our study was the superior performance of the Random Forest model. The model, with features selected through stepwise logistic regression, demonstrated remarkable accuracy, outperforming the GLM models in both training and testing phases. Normally, random forest would have high risk of over-fitting, But With an impressive 98% accuracy on the test data, it stood out as the most effective model for predicting diabetes outcomes in the Pima Indian dataset.</p>
+<p>In conclusion, our analysis highlights the critical factors associated with diabetes and showcases the potential of machine learning in enhancing the predictive capability of diabetes outcomes. The Random Forest model, with its high accuracy given a mostly Balanced dataset. For future work would include test the model with more data, fine tune the hyperparameter, gather more data metrics, and use more evaluation metrics like F-1 score for model selection.</p>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p>[1]Akimel O’odham From Wikipedia, the free encyclopedia, last edited on 5 December 2023, at 16:16 (UTC).</p>
+<p><a href="https://en.wikipedia.org/wiki/Akimel_O%27odham" class="uri">https://en.wikipedia.org/wiki/Akimel_O%27odham</a></p>
+<p>[2]What Is Diabetes? Last Reviewed April 2023, National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK)</p>
+<p><a href="https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes?utm_source=copy&amp;utm_medium=sharing+button&amp;utm_content=%2Fhealth-information%2Fdiabetes%2Foverview%2Fwhat-is-diabetes" class="uri">https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes?utm_source=copy&amp;utm_medium=sharing+button&amp;utm_content=%2Fhealth-information%2Fdiabetes%2Foverview%2Fwhat-is-diabetes</a></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
